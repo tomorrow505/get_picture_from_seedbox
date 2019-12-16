@@ -15,11 +15,11 @@ mv ./get_picture_from_seedbox/* . && rm -rf ./get_picture_from_seedbox/
 
 + 新建tmp和imgs目录
 
-mkdir tmp
+'mkdir tmp'
 
 midir imgs
 
-pwd获取当前目录路径
++ pwd获取当前目录路径
 
 pwd --> 如：/home/matthew/test
 
