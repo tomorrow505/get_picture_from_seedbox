@@ -19,7 +19,7 @@
 
 `mkdir tmp`
 
-`midir imgs`
+`mkdir imgs`
 
 + pwd获取当前目录路径
 
