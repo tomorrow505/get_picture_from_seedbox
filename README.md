@@ -54,7 +54,7 @@ self.namefont = ImageFont.truetype(name_file, 48)
 
 python3 脚本路径 视频路径
 
-+ 测试：
++ 测试（这里使用的脚本是相对路径，因为在当前目录下执行，如果不是的话自行切换为绝对路径）：
 
 `python3 picture_handler.py /home/qbittorrent/download/Cinta.Itu.Buta.2019.1080p.NF.WEB-DL.DDP5.1.H.264-Beerus.mkv`
 
