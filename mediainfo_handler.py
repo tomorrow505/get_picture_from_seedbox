@@ -12,8 +12,8 @@ def get_video_info(video_file):
         'general': '',
         'Video': '',
         'Audio': '',
-        'language': [],
-        'subtitle': [],
+        'language': '',
+        'subtitle': '',
         'full_info': ''
     }
 
@@ -39,16 +39,16 @@ def get_video_info(video_file):
             if 'title' in key.keys():
                 title = key['title']
                 if title.find('粤语') >= 0:
-                    mediainfo['language'].append('粤语')
+                    mediainfo['language']+='|粤语'
                 elif title.find('国语') >= 0:
-                    mediainfo['language'].append('国语')
+                    mediainfo['language']+='|国语'
                     # else:
                     #     mediainfo['language'].append('国语')
             else:
                 if'other_language' in key.keys():
                     language = key['other_language'][0]
                     if language.lower() == 'chinese':
-                        mediainfo['language'].append('国语')
+                        mediainfo['language']+='|国语'
 
         elif key['track_type'] == 'Text':
 
@@ -59,18 +59,18 @@ def get_video_info(video_file):
             if 'other_language' in key.keys():
                 subtitle = key['other_language'][0]
                 if subtitle.lower() == 'chinese':
-                    mediainfo['subtitle'].append('中字')
+                    mediainfo['subtitle']+='|中字'
                 if subtitle.lower() == 'english':
-                    mediainfo['subtitle'].append('英字')
+                    mediainfo['subtitle']+='|英字'
             else:
                 if 'title' in key.keys():
                     subtitle = key['title']
                     if subtitle.find('中字') >= 0 or subtitle.find('简体') >= 0 or subtitle.find('繁体') >= 0:
-                        mediainfo['subtitle'].append('中字')
+                        mediainfo['subtitle']+='|中字'
     if mediainfo['Audio']:
         mediainfo['Audio'] = 'Audio' + mediainfo['Audio']
     if text_info:
-        mediainfo['Audio'] = mediainfo['Audio'] + '\n\nText' + text_info
+        mediainfo['Audio'] = mediainfo['Audio'] + '**********Text' + text_info
 
     mediainfo['full_info'] = get_video_info_1(video_file)
 
@@ -87,13 +87,13 @@ def get_general(key):
     general.append(check('Size..............: ', key, 'other_file_size'))
     general.append(check('Duration..........: ', key, 'other_duration'))
     general.append(check('BitRate...........: ', key, 'other_overall_bit_rate'))
-    general = '\n'.join(part for part in general if part)
+    general = '*****'.join(part for part in general if part)
     return general
 
 
 def get_audio(key, audio_num):
 
-    audio_string = '\nAudio # %s............: ' % audio_num
+    audio_string = '*****Audio # %s............: ' % audio_num
     if 'format' in key.keys():
         audio_string = audio_string + key['format']
     if 'channel_s' in key.keys():
@@ -114,7 +114,7 @@ def get_audio(key, audio_num):
 
 def get_text(key, text_num):
 
-    text_string = '\nText # %s.............: ' % text_num
+    text_string = '*****Text # %s.............: ' % text_num
     if 'format' in key.keys():
         text_string = text_string + key['format']
     if 'title' in key.keys():
@@ -141,7 +141,7 @@ def get_video(key):
     general.append(check('Aspect Ratio......: ', key, 'other_display_aspect_ratio'))
     general.append(check('Frame Rate........: ', key, 'other_frame_rate'))
     general.append(check('Title.............: ', key, 'title'))
-    general = '\n'.join(part for part in general if part)
+    general = '*****'.join(part for part in general if part)
     return general
 
 
@@ -165,16 +165,16 @@ def get_video_info_1(video_file):
     for key in data:
         if key['track_type'] == 'General':
             general = get_general_1(key)
-            mediainfo = general + '\n'
+            mediainfo = general + '*****'
         elif key['track_type'] == 'Video':
             video = get_video_1(key)
-            mediainfo = mediainfo + '\n' + video + '\n'
+            mediainfo = mediainfo + '*****' + video + '*****'
         elif key['track_type'] == 'Audio':
             # audio_num = audio_num + 1
             # if audio_num > 2:
             #     continue
             audio = get_audio_1(key)
-            mediainfo = mediainfo + '\n' + audio + '\n'
+            mediainfo = mediainfo + '*****' + audio + '*****'
 
     mediainfo = mediainfo
 
@@ -194,7 +194,7 @@ def get_general_1(key):
     general.append(check('Encoded_Date---------------------: ', key, 'encoded_date'))
     general.append(check('other_writing_application--------: ', key, 'other_writing_application'))
     general.append(check('Encoded_Application/String-------: ', key, 'writing_library'))
-    general = '\n'.join(part for part in general if part)
+    general = '*****'.join(part for part in general if part)
     return general
 
 
@@ -219,7 +219,7 @@ def get_audio_1(key):
     general.append(check('Language/String------------------: ', key, 'other_language'))
     general.append(check('Default/String-------------------: ', key, 'default'))
     general.append(check('Forced/String--------------------: ', key, 'forced'))
-    general = '\n'.join(part for part in general if part)
+    general = '*****'.join(part for part in general if part)
     return general
 
 
@@ -250,7 +250,7 @@ def get_video_1(key):
     general.append(check('StreamSize/String----------------: ', key, 'other_stream_size'))
     general.append(check('Default/String-------------------: ', key, 'default'))
     general.append(check('Forced/String--------------------: ', key, 'forced '))
-    general = '\n'.join(part for part in general if part)
+    general = '*****'.join(part for part in general if part)
     return general
 
 
