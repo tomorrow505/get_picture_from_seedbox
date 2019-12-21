@@ -256,8 +256,6 @@ def get_video_1(key):
 
 if __name__ == "__main__":
 
-    # video_path = sys.argv[1]
-
-    video_path = r"W:\HUDBT-2019-06-09\虫虫危机.A Bug's Life 1998.BluRay.1080p.x265.10bit.MNHD-FRDS\A Bug's Life 1998.BluRay.1080p.x265.10bit.MNHD-FRDS.mkv"
+    video_path = sys.argv[1]
 
     get_video_info(video_path)
