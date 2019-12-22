@@ -39,16 +39,16 @@ def get_video_info(video_file):
             if 'title' in key.keys():
                 title = key['title']
                 if title.find('粤语') >= 0:
-                    mediainfo['language']+='|粤语'
+                    mediainfo['language'] += '|粤语'
                 elif title.find('国语') >= 0:
-                    mediainfo['language']+='|国语'
+                    mediainfo['language'] += '|国语'
                     # else:
                     #     mediainfo['language'].append('国语')
             else:
                 if'other_language' in key.keys():
                     language = key['other_language'][0]
                     if language.lower() == 'chinese':
-                        mediainfo['language']+='|国语'
+                        mediainfo['language'] += '|国语'
 
         elif key['track_type'] == 'Text':
 
@@ -59,14 +59,14 @@ def get_video_info(video_file):
             if 'other_language' in key.keys():
                 subtitle = key['other_language'][0]
                 if subtitle.lower() == 'chinese':
-                    mediainfo['subtitle']+='|中字'
+                    mediainfo['subtitle'] += '|中字'
                 if subtitle.lower() == 'english':
-                    mediainfo['subtitle']+='|英字'
+                    mediainfo['subtitle'] += '|英字'
             else:
                 if 'title' in key.keys():
                     subtitle = key['title']
                     if subtitle.find('中字') >= 0 or subtitle.find('简体') >= 0 or subtitle.find('繁体') >= 0:
-                        mediainfo['subtitle']+='|中字'
+                        mediainfo['subtitle'] += '|中字'
     if mediainfo['Audio']:
         mediainfo['Audio'] = 'Audio' + mediainfo['Audio']
     if text_info:
@@ -97,12 +97,11 @@ def get_audio(key, audio_num):
     if 'format' in key.keys():
         audio_string = audio_string + key['format']
     if 'channel_s' in key.keys():
-        num = int(key['channel_s'])
-        if num == 2:
+        if str(key['channel_s']).find('2') >= 0:
             audio_string = audio_string + ' ' + '2.0ch'
-        elif num == 6:
+        elif str(key['channel_s']).find('6') >= 0:
             audio_string = audio_string + ' ' + '5.1ch'
-        elif num == 8:
+        elif str(key['channel_s']).find('8') >= 0:
             audio_string = audio_string + ' ' + '7.1ch'
     if 'other_bit_rate' in key.keys():
         audio_string = audio_string + ' @ ' + key['other_bit_rate'][0]
