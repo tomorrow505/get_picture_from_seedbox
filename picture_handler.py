@@ -322,10 +322,10 @@ def send_picture(img_loc=None):
     print('正在上传到SM.MS……')
     files = {
         'smfile': open(img_loc, "rb"),
-        'file_id': ' '
+        'format': 'json'
     }
 
-    des_url = 'https://sm.ms/api/upload'
+    des_url = 'https://sm.ms/api/v2/upload?inajax=1'
     try:
         des_post = requests.post(
             url=des_url,
