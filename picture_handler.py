@@ -132,7 +132,7 @@ class Sheet:
         self.info_string = ''
 
         # -----------------------------就是签名内容---------------------------------------------------------
-        self.special_id = 'MatthewLXJ'
+        self.special_id = 'Rainism'
 
         # -----------------------------签名使用的字体-------------------------------------------------------
         name_file = 'Sample.ttf'
@@ -455,7 +455,7 @@ if __name__ == "__main__":
 
     video_name = video_path.split('/')[-1]
 
-    pic_path = './imgs/%s.jpg' % video_name
+    pic_path = './imgs/%s.jpg' % re.sub('[^0-9a-zA-Z-\.]', '', video_name)
 
     print(get_picture(video_path, pic_path))
 
