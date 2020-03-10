@@ -356,9 +356,7 @@ def send_picture_2(img_loc=None):
         files = [('file', (img_loc.split('\\')[-1], img, 'image/jpeg'))]
         des_post = requests.post(headers=headers, url=des_url, files=files)
         response = des_post.content.decode()
-
         url = re.search('"thumbnail_url":"(.*?)"', response)
-
         url = url.group(1).replace('/', '')
         url = url.replace('\\', '/')
         url = url.replace('_thumb', '')
@@ -372,6 +370,9 @@ def send_picture_2(img_loc=None):
 
 # catbox
 def send_picture_3(img_loc=None):
+    # cookie = {
+    #     "PHPSESSID": "8o8v85dtpg91v6tj6kugniue53"
+    # }
     print('正在上传到catbox……')
     headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                              "Chrome/74.0.3729.169",
@@ -397,6 +398,7 @@ def send_picture_3(img_loc=None):
 
 # lightshot
 def send_picture_4(img_loc=None):
+
     print('正在上传图片至lightshot')
     headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                              "Chrome/74.0.3729.169",
@@ -422,6 +424,7 @@ def send_picture_4(img_loc=None):
         url = ''
 
     return url
+
 
 
 def change_to_ss(number):
