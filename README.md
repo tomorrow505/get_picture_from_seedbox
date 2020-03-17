@@ -5,7 +5,8 @@
 
 **预装包：PIL,pymediainfo,lxml,beautifulsoup4**
 
-```pip3 install Pillow
+```
+pip install Pillow
 pip install pymediainfo
 pip install lxml
 pip install beautifulsoup4
