@@ -5,6 +5,13 @@
 
 **预装包：PIL,pymediainfo,lxml,beautifulsoup4**
 
+```pip3 install Pillow
+pip install pymediainfo
+pip install lxml
+pip install beautifulsoup4
+```
+
+
 #### 获取代码至服务器端：
 
 + sudo或者切换至root: 
@@ -39,7 +46,7 @@ self.special_id = 'MatthewLXJ'
 
 -----------------------------签名使用的字体（可以自己测试想要的字体）-------------------------------------------------------
 
-name_file = 'Sample.TTF' 
+name_file = 'Sample.ttf' 
 
 ----------------------------签名的位置（距离左边和距离图片上边的像素）----------------------------
 
