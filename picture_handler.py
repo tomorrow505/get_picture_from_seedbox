@@ -59,7 +59,7 @@ class Video:
         # --------------这个是临时的图片文件夹的绝对路径，需要获取读写权限----------------------------
         tmp_path = './tmp'
 
-        img_path = os.path.join(tmp_path, "{filename}-out-{d}.jpg".format(filename=file_name, d=n))
+        img_path = os.path.join(tmp_path, "{filename}-out-{d}.png".format(filename=file_name, d=n))
         command = 'ffmpeg -ss {timestring} -y -i "{file}" "-f" "image2" "-frames:v"  "1" "-c:v" "png" ' \
                   '"-loglevel" "8" {img_path}'.format(timestring=timestring, file=self.filename, img_path=img_path)
         try:
@@ -177,13 +177,13 @@ class Sheet:
         img_name = os.path.join(dir_name, base_name)
         for i in range(0, 12):
             try:
-                img_path = '{filename}-out-{d}.jpg'.format(filename=img_name, d=i)
+                img_path = '{filename}-out-{d}.png'.format(filename=img_name, d=i)
                 # print(img_path)
                 os.remove(img_path)
             except Exception:
                 pass
         try:
-            os.remove('{filename}-out-99.jpg'.format(filename=img_name))
+            os.remove('{filename}-out-99.png'.format(filename=img_name))
         except Exception:
             pass
         return grid
@@ -455,7 +455,7 @@ if __name__ == "__main__":
 
     video_name = video_path.split('/')[-1]
 
-    pic_path = './imgs/%s.jpg' % re.sub('[^0-9a-zA-Z-\.]', '', video_name)
+    pic_path = './imgs/%s.png' % re.sub('[^0-9a-zA-Z-\.]', '', video_name)
 
     print(get_picture(video_path, pic_path))
 
