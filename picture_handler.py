@@ -302,9 +302,9 @@ def get_picture(file_loc, img_loc):
 
     funcs = [0, 1, 2, 3]
     func = random.choice(funcs)
-    #   func = 3
+
     if func == 0:
-        pic_url = send_picture(img_loc=img_loc)
+        pic_url = send_picture_5(img_loc=img_loc)
     elif func == 1:
         pic_url = send_picture_2(img_loc=img_loc)
     elif func == 2:
@@ -353,7 +353,7 @@ def send_picture_2(img_loc=None):
     des_url = 'https://imgurl.org/upload/ftp'
     img = open(img_loc, 'rb')
     try:
-        files = [('file', (img_loc.split('\\')[-1], img, 'image/jpeg'))]
+        files = [('file', (img_loc.split('/')[-1], img, 'image/jpeg'))]
         des_post = requests.post(headers=headers, url=des_url, files=files)
         response = des_post.content.decode()
         url = re.search('"thumbnail_url":"(.*?)"', response)
@@ -370,9 +370,7 @@ def send_picture_2(img_loc=None):
 
 # catbox
 def send_picture_3(img_loc=None):
-    # cookie = {
-    #     "PHPSESSID": "8o8v85dtpg91v6tj6kugniue53"
-    # }
+
     print('正在上传到catbox……')
     headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                              "Chrome/74.0.3729.169",
@@ -381,7 +379,7 @@ def send_picture_3(img_loc=None):
     des_url = 'https://catbox.moe/user/api.php'
     img = open(img_loc, 'rb')
     try:
-        files = [('fileToUpload', (img_loc.split('\\')[-1], img, 'image/jpeg'))]
+        files = [('fileToUpload', (img_loc.split('/')[-1], img, 'image/jpeg'))]
         data = {
             'reqtype': 'fileupload',
             'userhash': ''
@@ -406,7 +404,7 @@ def send_picture_4(img_loc=None):
     des_url = 'https://prntscr.com/upload.php'
     img = open(img_loc, 'rb')
     try:
-        files = [('image', (img_loc.split('\\')[-1], img, 'image/jpeg'))]
+        files = [('image', (img_loc.split('/')[-1], img, 'image/jpeg'))]
         des_post = requests.post(headers=headers, url=des_url, files=files)
         html_ = des_post.content.decode()
         # print(html_)
@@ -424,6 +422,35 @@ def send_picture_4(img_loc=None):
         url = ''
 
     return url
+
+
+#i.endpot
+def send_picture_5(img_loc=None):
+    print('正在上传到i.endpot……')
+    headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                             "Chrome/74.0.3729.169"}
+
+    des_url = 'https://i.endpot.com/api/upload'
+    img = open(img_loc, 'rb')
+    try:
+        files = [('image', (img_loc.split('/')[-1], img, 'image/jpeg'))]
+
+        data = {
+            'nsfw': False
+        }
+
+        des_post = requests.post(headers=headers, url=des_url, files=files, data=data)
+        response = des_post.content.decode()
+
+        url = json.loads(response)['data']
+        url = url['link']
+        print(url)
+    except Exception as exc:
+        print('上传到imgurl错误：%s' % exc)
+        url = ''
+
+    return url
+
 
 
 
